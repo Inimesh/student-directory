@@ -1,17 +1,3 @@
-# Let's put all students into and array
-# students = [
-#     {name: "Dr. Hannibal Lecter", cohort: :november},
-#     {name: "Darth Vader", cohort: :november},
-#     {name: "Nure Rached", cohort: :november},
-#     {name: "Michael Corleone", cohort: :november},
-#     {name: "Alex DeLarge", cohort: :november},
-#     {name: "The Wicked Witch of the West", cohort: :november},
-#     {name: "Terminator", cohort: :november},
-#     {name: "Freddy Krueger", cohort: :november},
-#     {name: "The Joker", cohort: :november},
-#     {name: "Joffrey Baratheon", cohort: :november},
-#     {name: "Norman Bates", cohort: :november}
-# ]
 
 def input_students
     puts "Please enter student credentials as prompted."
@@ -23,7 +9,7 @@ def input_students
     name = gets.chomp
 
     # User must enter a name
-    while name == ""
+    while name.empty?
         puts "you must enter a student name to begin:"
         name = gets.chomp
     end
@@ -69,10 +55,12 @@ def print_by_cohort(students)
         students_by_cohort[student[:cohort]] = []
     }
 
+    # append student details to array value associated with cohort key
     students.each { |student| 
         students_by_cohort[student[:cohort]] << student
     }
 
+    # Print out of cohort name follwed by related student details
     students_by_cohort.each {|cohort, students|
         puts "#{cohort} cohort:"
         students.each {|student|
