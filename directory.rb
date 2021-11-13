@@ -21,6 +21,13 @@ def input_students
     # get the first name
     puts "Please enter name:"
     name = gets.chomp
+
+    # User must enter a name
+    while name == ""
+        puts "you must enter a student name to begin:"
+        name = gets.chomp
+    end
+
     puts "Please enter cohort:"
     cohort = gets.chomp
     puts "Please enter country of birth:"
@@ -46,9 +53,32 @@ def print_header
     puts  "-------------------------------"
 end
 
-def print(students)
+def print_n(students)
+    puts "All student listing"
     students.each_with_index { |student, index|
         puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort) (Contry of birth: #{student[:cob]})"
+    }
+    print "\n"
+end
+
+def print_by_cohort(students)
+    puts "Students organised by cohort:"
+    students_by_cohort = {}
+    # Initialize hash of cohort keys, empty array values
+    students.each { |student| 
+        students_by_cohort[student[:cohort]] = []
+    }
+
+    students.each { |student| 
+        students_by_cohort[student[:cohort]] << student
+    }
+
+    students_by_cohort.each {|cohort, students|
+        puts "#{cohort} cohort:"
+        students.each {|student|
+            puts "#{student[:name]} (Contry of birth: #{student[:cob]})"
+        }
+        print "\n"
     }
 end
 
@@ -59,5 +89,6 @@ end
 # nothing happens until we call the methods
 students = input_students
 print_header
-print(students)
+print_n(students)
+print_by_cohort(students)
 print_footer(students)
